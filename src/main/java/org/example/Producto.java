@@ -1,0 +1,46 @@
+package org.example;
+
+public class Producto {
+    private int nombre;
+    private int precio;
+    private int cantidad;
+
+    public Producto(int nombre, int precio, int cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+
+    public int getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(int nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre=" + nombre +
+                ", precio=" + precio +
+                ", cantidad=" + cantidad +
+                '}';
+    }
+}
