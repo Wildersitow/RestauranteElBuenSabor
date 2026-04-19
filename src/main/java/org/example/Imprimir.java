@@ -43,51 +43,26 @@ public static void mostrarPedido(){
     System.out.println("--------------------");
     System.out.printf(FMT_LINEA_TOTAL, "Subtotal:", subtotal);
 }
-public static void imprimirFacturaCompleta(){
-double sub=0;double iva=0;double tot=0;double prop=0;int cont=0;double aux=0;
-// calcula subtotal otra vez
-int i=0;while(i<Datos.nom.length){
-if(Datos.cant[i]>0){
-sub=sub+Datos.p[i]*Datos.cant[i];cont=cont+1;}
-i++;}// fin while
-if(cont>3){aux=sub-(sub*0.05);}else{aux=sub;}
-if(aux>50000){
-iva=aux*0.19;
-tot=aux+iva;
-prop=tot*0.10;
-tot=tot+prop;}
-else{
-iva=aux*0.19;
-tot=aux+iva;
-prop=0;}// fin if-else
-String sep="========================================";
-System.out.println(sep);
-System.out.println("    RESTAURANTE EL BUEN SABOR");
-System.out.println("    Calle 15 #8-32, Valledupar");
-System.out.println("    NIT: 900.123.456-7");
-System.out.println(sep);
-System.out.printf("FACTURA No. %03d%n",Datos.nf);
-System.out.println("----------------------------------------");
-// imprime cada item del pedido
-int j=0;while(j<Datos.nom.length){
-if(Datos.cant[j]>0){
-System.out.printf("%-20s x%-6d $%,.0f%n",Datos.nom[j],Datos.cant[j],(Datos.p[j]*Datos.cant[j]));}
-j++;}// fin while
-System.out.println("----------------------------------------");
-System.out.printf("%-27s $%,.0f%n","Subtotal:",aux);
-System.out.printf("%-27s $%,.0f%n","IVA (19%):",iva);
-if(prop>0){
-System.out.printf("%-27s $%,.0f%n","Propina (10%):",prop);}// fin if prop
-System.out.println("----------------------------------------");
-System.out.printf("%-27s $%,.0f%n","TOTAL:",tot);
-System.out.println(sep);
-System.out.println("Gracias por su visita!");
-System.out.println("El Buen Sabor - Valledupar");
-System.out.println(sep);
-// actualiza estado e incrementa factura - tres responsabilidades en un metodo
-Datos.nf=Datos.nf+1;
-Datos.est=0;
-Datos.tot=tot;
+public static void imprimirFacturaCompleta(double total){
+    double subtotal = Proceso.calcularSubtotal();
+    double subtotalConDesc = aplicarDescuento(subtotal);
+    double iva = subtotalConDesc * 0.19;
+    double propina = calcularPropina(subtotalConDesc, total, iva);
+
+    imprimirEncabezadoRestaurante();
+    System.out.printf("FACTURA No. %03d%n", Datos.getNumeroFactura());
+    System.out.println(SEPARADOR_CORTO);
+
+    imprimirItemsPedido();
+
+    System.out.println(SEPARADOR_CORTO);
+    imprimirTotales(subtotalConDesc, iva, propina, total);
+    System.out.println(SEPARADOR);
+    System.out.println("Gracias por su visita!");
+    System.out.println(Datos.nombreRestaurante + " - " + Datos.direccion);
+    System.out.println(SEPARADOR);
+
+    actualizarEstadoPostFactura(total);
 }
 public static void imprimirFacturaResumen(){
 double sub=0;double iva=0;double tot=0;double prop=0;int cont=0;double aux=0;
