@@ -64,39 +64,6 @@ public static void imprimirFacturaCompleta(double total){
 
     actualizarEstadoPostFactura(total);
 }
-public static void imprimirFacturaResumen(){
-double sub=0;double iva=0;double tot=0;double prop=0;int cont=0;double aux=0;
-// calcula subtotal otra vez igual que en imprimirFacturaCompleta
-int i=0;while(i<Datos.nom.length){
-if(Datos.cant[i]>0){
-sub=sub+Datos.p[i]*Datos.cant[i];cont=cont+1;}
-i++;}// fin while
-if(cont>3){aux=sub-(sub*0.05);}else{aux=sub;}
-if(aux>50000){
-iva=aux*0.19;
-tot=aux+iva;
-prop=tot*0.10;
-tot=tot+prop;}
-else{
-iva=aux*0.19;
-tot=aux+iva;
-prop=0;}// fin if-else
-String sep="========================================";
-System.out.println(sep);
-System.out.println("    RESTAURANTE EL BUEN SABOR");
-System.out.println("    Calle 15 #8-32, Valledupar");
-System.out.println("    NIT: 900.123.456-7");
-System.out.println(sep);
-System.out.printf("FACTURA No. %03d (RESUMEN)%n",Datos.nf);
-System.out.println("----------------------------------------");
-System.out.printf("%-27s $%,.0f%n","Subtotal:",aux);
-System.out.printf("%-27s $%,.0f%n","IVA (19%):",iva);
-if(prop>0){
-System.out.printf("%-27s $%,.0f%n","Propina (10%):",prop);}// fin if prop
-System.out.println("----------------------------------------");
-System.out.printf("%-27s $%,.0f%n","TOTAL:",tot);
-System.out.println(sep);
-}
 
     private static void imprimirEncabezadoRestaurante() {
         System.out.println(SEPARADOR);
