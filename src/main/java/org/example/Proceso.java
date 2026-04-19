@@ -18,15 +18,56 @@ public class Proceso {
 
     //En este taller las funciones son public static porque no se instancia ninguna clase
     public static double calcularTotal(){
+        double subtotal        = calcularSubtotal();
+        double subtotalConDesc = aplicarDescuento(subtotal);
+        double total           = calcularTotalConImpuestos(subtotalConDesc);
+        Datos.setEstadoMesa(1);
+        Datos.setTotalFactura(total);
 
+        return total;
     }
 
-    public static double aplicarDescuento(){
+    private static double aplicarDescuento(double subtotal){
+        if (contarProductosDiferentes() > MIN_PRODUCTOS_DESCUENTO) {
+            return subtotal - (subtotal * TASA_DESCUENTO_GRUPO);
+        }
+        return subtotal;
+    }
 
+    private static double calcularTotalConImpuestos(double subtotal) {
+        double iva   = subtotal * TASA_IVA;
+        double total = subtotal + iva;
+
+        if (subtotal > UMBRAL_PROPINA) {
+            total += total * TASA_PROPINA;
+        }
+
+        return total;
     }
 
     public static double calcularSubtotal(){
+        double subtotal = 0;
 
+        for (Producto producto : Datos.getCatalogo()) {
+            if (producto.tieneUnidades()) {
+                subtotal += producto.getSubtotalProducto();
+            }
+        }
+
+        return subtotal;
+    }
+
+    public static int contarProductosDiferentes() {
+        int contador = 0;
+
+        for (Producto producto : Datos.getCatalogo()) {
+            if (producto.tieneUnidades()) {
+                contador++;
+            }
+        }
+
+        return contador;
     }
 
 }
+
