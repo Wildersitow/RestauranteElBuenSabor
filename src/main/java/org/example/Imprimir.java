@@ -9,16 +9,23 @@ package org.example;
  * @author alfre
  */
 public class Imprimir {
-public static void mostrarCarta(){
-System.out.println("========================================");
+
+    private static final String SEPARADOR       = "========================================";
+    private static final String SEPARADOR_CORTO = "----------------------------------------";
+    private static final String FMT_LINEA_TOTAL = "%-27s $%,.0f%n";  // MP #25
+    private static final String FMT_ITEM        = "%-20s x%-6d $%,.0f%n";
+
+public static void mostrarCarta(){System.out.println("========================================");
 System.out.println("    RESTAURANTE EL BUEN SABOR");
 System.out.println("    --- NUESTRA CARTA ---");
 System.out.println("========================================");
 int i=0;
 while(i<Datos.nom.length){
 System.out.printf("%d. %-22s $%,.0f%n",(i+1),Datos.nom[i],Datos.p[i]);
-i++;}// fin while
-System.out.println("========================================");}
+i++;
+}// fin while
+System.out.println("========================================");
+}
 public static void mostrarPedido(){
 double sub=0;int i=0;
 System.out.println("--- PEDIDO ACTUAL ---");
@@ -27,10 +34,13 @@ if(Datos.cant[i]>0){
 // imprime producto con cantidad y subtotal parcial
 System.out.printf("%-20s x%-6d $%,.0f%n",Datos.nom[i],Datos.cant[i],(Datos.p[i]*Datos.cant[i]));
 // suma al subtotal
-sub=sub+Datos.p[i]*Datos.cant[i];}
-i++;}// fin while
+sub=sub+Datos.p[i]*Datos.cant[i];
+}
+i++;
+}// fin while
 System.out.println("--------------------");
-System.out.printf("%-27s $%,.0f%n","Subtotal:",sub);}
+System.out.printf("%-27s $%,.0f%n","Subtotal:",sub);
+}
 public static void imprimirFacturaCompleta(){
 double sub=0;double iva=0;double tot=0;double prop=0;int cont=0;double aux=0;
 // calcula subtotal otra vez
