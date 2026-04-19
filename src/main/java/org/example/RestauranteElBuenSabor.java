@@ -123,6 +123,18 @@ public class RestauranteElBuenSabor {
         }
     }
 
+    private static void opcionGenerarFactura() {
+        if (!Utilidades.hayProductosEnPedido()) {
+            System.out.println("No se puede generar factura.");
+            System.out.println("No hay productos en el pedido.");
+            System.out.println("Use la opcion 2 para agregar productos primero.");
+            return;
+        }
+
+        double total = Proceso.calcularTotal();
+        Imprimir.imprimirFacturaCompleta(total);
+    }
+
     private static boolean esCantidadValida(int cantidad) {
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser un valor positivo.");
