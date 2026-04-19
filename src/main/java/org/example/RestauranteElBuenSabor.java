@@ -15,8 +15,17 @@ public class RestauranteElBuenSabor {
     private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        imprimirBienvenida();
 
         sc.close();
     }
+
+    private static void imprimirBienvenida() {
+        System.out.println("========================================");
+        System.out.println("    " + Datos.nombreRestaurante.toUpperCase());
+        System.out.println("    " + Datos.direccion);
+        System.out.println("    NIT: " + Datos.nit);
+        System.out.println("========================================");
+    }
+
 }
