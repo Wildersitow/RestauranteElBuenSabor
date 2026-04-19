@@ -87,7 +87,8 @@ System.out.println(sep);
 // actualiza estado e incrementa factura - tres responsabilidades en un metodo
 Datos.nf=Datos.nf+1;
 Datos.est=0;
-Datos.tot=tot;}
+Datos.tot=tot;
+}
 public static void imprimirFacturaResumen(){
 double sub=0;double iva=0;double tot=0;double prop=0;int cont=0;double aux=0;
 // calcula subtotal otra vez igual que en imprimirFacturaCompleta
@@ -119,5 +120,19 @@ if(prop>0){
 System.out.printf("%-27s $%,.0f%n","Propina (10%):",prop);}// fin if prop
 System.out.println("----------------------------------------");
 System.out.printf("%-27s $%,.0f%n","TOTAL:",tot);
-System.out.println(sep);}    
+System.out.println(sep);}
+
+    private static double aplicarDescuento(double subtotal) {
+        if (Proceso.contarProductosDiferentes() > 3) {
+            return subtotal - (subtotal * 0.05);
+        }
+        return subtotal;
+    }
+
+    private static double calcularPropina(double subtotal, double total, double iva) {
+        if (subtotal > 50_000) {
+            return total - subtotal - iva;
+        }
+        return 0;
+    }
 }
