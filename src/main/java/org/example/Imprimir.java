@@ -28,19 +28,20 @@ public static void mostrarCarta(){
     System.out.println(SEPARADOR);
 }
 public static void mostrarPedido(){
-double sub=0;int i=0;
-System.out.println("--- PEDIDO ACTUAL ---");
-while(i<Datos.nom.length){
-if(Datos.cant[i]>0){
-// imprime producto con cantidad y subtotal parcial
-System.out.printf("%-20s x%-6d $%,.0f%n",Datos.nom[i],Datos.cant[i],(Datos.p[i]*Datos.cant[i]));
-// suma al subtotal
-sub=sub+Datos.p[i]*Datos.cant[i];
-}
-i++;
-}// fin while
-System.out.println("--------------------");
-System.out.printf("%-27s $%,.0f%n","Subtotal:",sub);
+    double subtotal = 0;
+    System.out.println("--- PEDIDO ACTUAL ---");
+    for (Producto producto : Datos.getCatalogo()) {
+        if (producto.tieneUnidades()) {
+            System.out.printf(FMT_ITEM,
+                    producto.getNombre(),
+                    producto.getCantidad(),
+                    producto.getSubtotalProducto());
+            subtotal += producto.getSubtotalProducto();
+        }
+    }
+
+    System.out.println("--------------------");
+    System.out.printf(FMT_LINEA_TOTAL, "Subtotal:", subtotal);
 }
 public static void imprimirFacturaCompleta(){
 double sub=0;double iva=0;double tot=0;double prop=0;int cont=0;double aux=0;
