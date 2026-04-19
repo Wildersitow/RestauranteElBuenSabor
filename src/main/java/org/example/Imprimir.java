@@ -12,19 +12,20 @@ public class Imprimir {
 
     private static final String SEPARADOR       = "========================================";
     private static final String SEPARADOR_CORTO = "----------------------------------------";
-    private static final String FMT_LINEA_TOTAL = "%-27s $%,.0f%n";  // MP #25
+    private static final String FMT_LINEA_TOTAL = "%-27s $%,.0f%n";
     private static final String FMT_ITEM        = "%-20s x%-6d $%,.0f%n";
 
-public static void mostrarCarta(){System.out.println("========================================");
-System.out.println("    RESTAURANTE EL BUEN SABOR");
-System.out.println("    --- NUESTRA CARTA ---");
-System.out.println("========================================");
-int i=0;
-while(i<Datos.nom.length){
-System.out.printf("%d. %-22s $%,.0f%n",(i+1),Datos.nom[i],Datos.p[i]);
-i++;
-}// fin while
-System.out.println("========================================");
+public static void mostrarCarta(){
+    System.out.println(SEPARADOR);
+    System.out.println("    " + Datos.nombreRestaurante.toUpperCase());
+    System.out.println("    --- NUESTRA CARTA ---");
+    System.out.println(SEPARADOR);
+    int numero = 1;
+    for (Producto producto : Datos.getCatalogo()) {
+        System.out.printf("%d. %-22s $%,.0f%n", numero, producto.getNombre(), producto.getPrecio());
+        numero++;
+    }
+    System.out.println(SEPARADOR);
 }
 public static void mostrarPedido(){
 double sub=0;int i=0;
