@@ -10,6 +10,12 @@ package org.example;
  */
 public class Proceso {
 
+    private static final double TASA_IVA = 0.19;
+    private static final double TASA_PROPINA            = 0.10;
+    private static final double TASA_DESCUENTO_GRUPO    = 0.05;
+    private static final double UMBRAL_PROPINA          = 50_000;
+    private static final int    MIN_PRODUCTOS_DESCUENTO = 3;
+
     //En este taller las funciones son public static porque no se instancia ninguna clase
     public static double calcularTotal(){
 
