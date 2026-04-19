@@ -3,13 +3,14 @@ package org.example;
 public class Producto {
 
     private String nombre;
-    private int precio;
+    private double precio;
     private int cantidad;
 
-    public Producto(String nombre, int precio, int cantidad) {
+    //Cantidad no esta presente en el constructor ya que esta inicia como 0 siempre
+    public Producto(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
-        this.cantidad = cantidad;
+        this.cantidad = 0;
     }
 
     public String getNombre() {
@@ -20,11 +21,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
