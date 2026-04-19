@@ -71,4 +71,7 @@ public class Datos {
     public static void setNumeroFactura(int numeroFactura) {
         Datos.numeroFactura = numeroFactura;
     }
+
+    public static void   incrementarNumeroFactura() {
+        numeroFactura++; }
 }
