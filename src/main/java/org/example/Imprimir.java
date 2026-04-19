@@ -120,7 +120,45 @@ if(prop>0){
 System.out.printf("%-27s $%,.0f%n","Propina (10%):",prop);}// fin if prop
 System.out.println("----------------------------------------");
 System.out.printf("%-27s $%,.0f%n","TOTAL:",tot);
-System.out.println(sep);}
+System.out.println(sep);
+}
+
+    private static void imprimirEncabezadoRestaurante() {
+        System.out.println(SEPARADOR);
+        System.out.println("    " + Datos.nombreRestaurante.toUpperCase());
+        System.out.println("    " + Datos.direccion);
+        System.out.println("    NIT: " + Datos.nit);
+        System.out.println(SEPARADOR);
+    }
+
+    private static void imprimirItemsPedido() {
+        for (Producto producto : Datos.getCatalogo()) {
+            if (producto.tieneUnidades()) {
+                System.out.printf(FMT_ITEM,
+                        producto.getNombre(),
+                        producto.getCantidad(),
+                        producto.getSubtotalProducto());
+            }
+        }
+    }
+
+    private static void imprimirTotales(double subtotal, double iva, double propina, double total) {
+        System.out.printf(FMT_LINEA_TOTAL, "Subtotal:", subtotal);
+        System.out.printf(FMT_LINEA_TOTAL, "IVA (19%):", iva);
+
+        if (propina > 0) {
+            System.out.printf(FMT_LINEA_TOTAL, "Propina (10%):", propina);
+        }
+
+        System.out.println(SEPARADOR_CORTO);
+        System.out.printf(FMT_LINEA_TOTAL, "TOTAL:", total);
+    }
+
+    private static void actualizarEstadoPostFactura(double total) {
+        Datos.incrementarNumeroFactura();
+        Datos.setEstadoMesa(0);
+        Datos.setTotalFactura(total);
+    }
 
     private static double aplicarDescuento(double subtotal) {
         if (Proceso.contarProductosDiferentes() > 3) {
