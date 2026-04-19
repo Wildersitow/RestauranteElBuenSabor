@@ -75,6 +75,66 @@ public class RestauranteElBuenSabor {
         return true;
     }
 
+    private static void opcionAgregarProducto() {
+        System.out.println("--- AGREGAR PRODUCTO ---");
+
+        int numeroProd = leerEntero("Numero de producto (1-" + Datos.getTotalProductosEnCarta() + "): ");
+
+        if (!esProductoValido(numeroProd)) {
+            return;
+        }
+
+        int cantidad = leerEntero("Cantidad: ");
+
+        if (!esCantidadValida(cantidad)) {
+            return;
+        }
+
+        if (Datos.getEstadoMesa() == 0) {
+            pedirNumeroMesa();
+        }
+
+        Producto producto = Datos.getCatalogo()[numeroProd - 1];
+        producto.agregarCantidad(cantidad);
+
+        System.out.println("Producto agregado al pedido.");
+        System.out.println("  -> " + producto.getNombre() + " x" + cantidad);
+    }
+
+    private static void pedirNumeroMesa() {
+        int mesa = leerEntero("Ingrese numero de mesa: ");
+
+        if (mesa > 0) {
+            Datos.setNumeroMesa(mesa);
+        } else {
+            System.out.println("Numero de mesa invalido. Se asigna mesa 1 por defecto.");
+            Datos.setNumeroMesa(1);
+        }
+
+        Datos.setEstadoMesa(1);
+    }
+
+    private static boolean esCantidadValida(int cantidad) {
+        if (cantidad <= 0) {
+            System.out.println("La cantidad debe ser un valor positivo.");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean esProductoValido(int numero) {
+        if (numero <= 0) {
+            System.out.println("El numero debe ser mayor a cero.");
+            return false;
+        }
+        if (numero > Datos.getTotalProductosEnCarta()) {
+            System.out.println("Producto no existe. La carta tiene "
+                    + Datos.getTotalProductosEnCarta() + " productos.");
+            return false;
+        }
+        return true;
+    }
+
     private static int leerEntero(String mensaje) {
         System.out.print(mensaje);
         return sc.nextInt();
