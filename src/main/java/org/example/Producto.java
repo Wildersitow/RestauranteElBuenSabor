@@ -1,29 +1,31 @@
 package org.example;
 
 public class Producto {
-    private int nombre;
-    private int precio;
+
+    private String nombre;
+    private double precio;
     private int cantidad;
 
-    public Producto(int nombre, int precio, int cantidad) {
+    //Cantidad no esta presente en el constructor ya que esta inicia como 0 siempre
+    public Producto(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
-        this.cantidad = cantidad;
+        this.cantidad = 0;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -32,7 +34,23 @@ public class Producto {
     }
 
     public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+        if (cantidad >= 0) {
+            this.cantidad = cantidad;
+        }
+    }
+
+    public void agregarCantidad(int unidades) {
+        if (unidades > 0) {
+            this.cantidad += unidades;
+        }
+    }
+
+    public double getSubtotalProducto() {
+        return precio * cantidad;
+    }
+
+    public boolean tieneUnidades() {
+        return cantidad > 0;
     }
 
     @Override
