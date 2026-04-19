@@ -135,6 +135,11 @@ public class RestauranteElBuenSabor {
         Imprimir.imprimirFacturaCompleta(total);
     }
 
+    private static void opcionNuevaMesa() {
+        Utilidades.reiniciarPedido();
+        System.out.println("Mesa reiniciada. Lista para nuevo cliente.");
+    }
+
     private static boolean esCantidadValida(int cantidad) {
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser un valor positivo.");
