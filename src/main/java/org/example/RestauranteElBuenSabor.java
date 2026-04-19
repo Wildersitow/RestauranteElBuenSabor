@@ -114,6 +114,15 @@ public class RestauranteElBuenSabor {
         Datos.setEstadoMesa(1);
     }
 
+    private static void opcionVerPedido() {
+        if (Utilidades.hayProductosEnPedido()) {
+            Imprimir.mostrarPedido();
+        } else {
+            System.out.println("No hay productos en el pedido actual.");
+            System.out.println("Use la opcion 2 para agregar productos.");
+        }
+    }
+
     private static boolean esCantidadValida(int cantidad) {
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser un valor positivo.");
