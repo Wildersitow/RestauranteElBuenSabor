@@ -20,7 +20,8 @@ public class RestauranteElBuenSabor {
 
         while (ejecutando) {
             imprimirMenuPrincipal();
-            
+            int opcion = leerEntero("Seleccione una opcion: ");
+            ejecutando = procesarOpcion(opcion);
         }
         sc.close();
     }
@@ -41,6 +42,42 @@ public class RestauranteElBuenSabor {
         System.out.println("5. Nueva mesa");
         System.out.println("0. Salir");
         System.out.println("========================================");
+    }
+
+    private static boolean procesarOpcion(int opcion) {
+        System.out.println();
+
+        switch (opcion) {
+            case 1:
+                Imprimir.mostrarCarta();
+                break;
+            case 2:
+                opcionAgregarProducto();
+                break;
+            case 3:
+                opcionVerPedido();
+                break;
+            case 4:
+                opcionGenerarFactura();
+                break;
+            case 5:
+                opcionNuevaMesa();
+                break;
+            case 0:
+                System.out.println("Hasta luego!");
+                return false;
+            default:
+                System.out.println("Opcion no valida. Seleccione entre 0 y 5.");
+
+        }
+
+        System.out.println();
+        return true;
+    }
+
+    private static int leerEntero(String mensaje) {
+        System.out.print(mensaje);
+        return sc.nextInt();
     }
 
 }
