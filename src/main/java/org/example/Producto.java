@@ -2,21 +2,21 @@ package org.example;
 
 public class Producto {
 
-    private int nombre;
+    private String nombre;
     private int precio;
     private int cantidad;
 
-    public Producto(int nombre, int precio, int cantidad) {
+    public Producto(String nombre, int precio, int cantidad) {
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
