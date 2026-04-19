@@ -33,7 +33,23 @@ public class Producto {
     }
 
     public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+        if (cantidad >= 0) {
+            this.cantidad = cantidad;
+        }
+    }
+
+    public void agregarCantidad(int unidades) {
+        if (unidades > 0) {
+            this.cantidad += unidades;
+        }
+    }
+
+    public double getSubtotalProducto() {
+        return precio * cantidad;
+    }
+
+    public boolean tieneUnidades() {
+        return cantidad > 0;
     }
 
     @Override
